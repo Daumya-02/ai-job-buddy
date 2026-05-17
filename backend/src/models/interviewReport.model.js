@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const userModel = require('./user.model')
 
 /**
  * JD
@@ -17,7 +18,7 @@ const technicalQuestionSchema = new mongoose.Schema({
         type:String,
         required:[true,"Technical question is required."]
     },
-    expectation:{
+    intention:{
         type:String,
         required:[true, "Expectation is required."]
     },
@@ -34,7 +35,7 @@ const behavioralQuestionSchema = new mongoose.Schema({
         type: String,
         required: [true, "Behavioral question is required."]
     },
-    expectation: {
+    intention: {
         type: String,
         required: [true, "Expectation is required."]
     },
@@ -60,7 +61,7 @@ const skillGapSchema = new mongoose.Schema({
     _id: false
 })
 
-const prepPlanSchema = new mongoose.Schema({
+const preparationPlanSchema = new mongoose.Schema({
     day:{
         type:Number,
         required: [true, "Day is required."]
@@ -76,14 +77,14 @@ const prepPlanSchema = new mongoose.Schema({
 })
 
 const interviewReportSchema = new mongoose.Schema({
-    JD:{
+    jobDescription:{
         type: String,
         required: [true, "Job Description is required."]
     },
     resume:{
         type: String
     },
-    selfdescription:{
+    selfDescription:{
         type: String
     },
     matchScore:{
@@ -94,7 +95,11 @@ const interviewReportSchema = new mongoose.Schema({
     technicalQuestions:[technicalQuestionSchema],
     behavioralQuestions:[behavioralQuestionSchema],
     skillGaps:[skillGapSchema],
-    prepPlan:[prepPlanSchema],
+    preparationPlan:[preparationPlanSchema],
+    user:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"users"
+    }
 },{
     timestamps:true
 })
